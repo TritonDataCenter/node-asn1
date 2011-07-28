@@ -148,13 +148,25 @@ test('anonymous LDAPv3 bind', function(t) {
   t.equal(ber.readInt(), 3, 'LDAP version should have been 3');
   t.equal(ber.readString(), '', 'Bind DN should have been empty');
   t.equal(ber.length, 0, 'string length should have been 0');
-  t.equal(ber.readByte(), 128, 'Should have been ContextSpecific (choice)');
+  t.equal(ber.readByte(), 0x80, 'Should have been ContextSpecific (choice)');
   t.equal(ber.readByte(), 0, 'Should have been simple bind');
-  try {
-    ber.readByte();
-    t.fail('Should have thrown');
-  } catch (e) {
-    t.equal(e.name, 'InsufficientDataError', 'Not the correct error type');
-  }
+  t.equal(null, ber.readByte(), 'Should be out of data');
+  t.end();
+});
+
+
+test('long string', function(t) {
+  var buf = new Buffer(256);
+  var o;
+  var s =
+    '2;649;CN=Red Hat CS 71GA Demo,O=Red Hat CS 71GA Demo,C=US;' +
+    'CN=RHCS Agent - admin01,UID=admin01,O=redhat,C=US [1] This is ' +
+    'Teena Vradmin\'s description.';
+  buf[0] = 0x04;
+  buf[1] = 0x81;
+  buf[2] = 0x94;
+  buf.write(s, 3);
+  var ber = new BerReader(buf.slice(0, 3 + s.length));
+  t.equal(ber.readString(), s);
   t.end();
 });
