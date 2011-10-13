@@ -257,3 +257,18 @@ test('LDAP bind message', function(t) {
   t.end();
 });
 
+
+test('Write OID', function(t) {
+  var oid = '1.2.840.113549.1.1.1';
+  var writer = new BerWriter();
+  writer.writeOID(oid);
+
+  var ber = writer.buffer;
+  t.ok(ber);
+  console.log(require('util').inspect(ber));
+  console.log(require('util').inspect(new Buffer([0x06, 0x09, 0x2a, 0x86,
+                                                  0x48, 0x86, 0xf7, 0x0d,
+                                                  0x01, 0x01, 0x01])));
+
+  t.end();
+});
