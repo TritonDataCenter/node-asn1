@@ -2,7 +2,7 @@
   "author": "Mark Cavage <mcavage@gmail.com>",
   "name": "asn1",
   "description": "Contains parsers and serializers for ASN.1 (currently BER only)",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "repository": {
     "type": "git",
     "url": "git://github.com/mcavage/node-asn1.git"
@@ -13,7 +13,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "tap": "~0.0.5"
+    "tap": "0.1.2"
   },
   "scripts": {
     "pretest": "which gjslint; if [[ \"$?\" = 0 ]] ; then  gjslint --nojsdoc -r lib -r tst; else echo \"Missing gjslint. Skipping lint\"; fi",
