@@ -2,7 +2,6 @@
 
 var test = require('tap').test;
 var sys = require('sys');
-var log4js = require('log4js');
 
 ///--- Globals
 
@@ -10,7 +9,6 @@ var BerWriter;
 
 var BerReader;
 
-var LOG = log4js.getLogger(this);
 
 ///--- Tests
 
