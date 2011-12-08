@@ -1,14 +1,16 @@
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
 var test = require('tap').test;
-
-
+var sys = require('sys');
+var log4js = require('log4js');
 
 ///--- Globals
 
 var BerWriter;
 
+var BerReader;
 
+var LOG = log4js.getLogger(this);
 
 ///--- Tests
 
@@ -139,6 +141,28 @@ test('write string', function(t) {
   t.end();
 });
 
+test('write buffer', function(t) {
+  var writer = new BerWriter();
+  // write some stuff to start with
+  writer.writeString('hello world');
+  var ber = writer.buffer;
+  var buf = new Buffer([0x04, 0x0b, 0x30, 0x09, 0x02, 0x01, 0x0f, 0x01, 0x01,
+     0xff, 0x01, 0x01, 0xff]);
+  writer.writeBuffer(buf.slice(2, buf.length), 0x04);
+  ber = writer.buffer;
+
+  t.ok(ber);
+  t.equal(ber.length, 26, 'wrong length');
+  t.equal(ber[0], 0x04, 'wrong tag');
+  t.equal(ber[1], 11, 'wrong length');
+  t.equal(ber.slice(2, 13).toString('utf8'), 'hello world', 'wrong value');
+  t.equal(ber[13], buf[0], 'wrong tag');
+  t.equal(ber[14], buf[1], 'wrong length');
+  for (var i = 13, j = 0; i < ber.length && j < buf.length; i++, j++) {
+    t.equal(ber[i], buf[j], 'buffer contents not identical');
+  }
+  t.end();
+});
 
 test('write string array', function(t) {
   var writer = new BerWriter();
