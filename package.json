@@ -1,5 +1,9 @@
 {
   "author": "Mark Cavage <mcavage@gmail.com>",
+  "contributors": [
+    "David Gwynne <loki@animata.net>",
+    "Yunong Xiao <yunong@joyent.com>"
+  ],
   "name": "asn1",
   "description": "Contains parsers and serializers for ASN.1 (currently BER only)",
   "version": "0.1.11",
