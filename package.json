@@ -6,7 +6,7 @@
   ],
   "name": "asn1",
   "description": "Contains parsers and serializers for ASN.1 (currently BER only)",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "repository": {
     "type": "git",
     "url": "git://github.com/mcavage/node-asn1.git"
