@@ -18,5 +18,6 @@
   },
   "scripts": {
     "test": "./node_modules/.bin/tap ./tst"
-  }
+  },
+  "license": "MIT"
 }
