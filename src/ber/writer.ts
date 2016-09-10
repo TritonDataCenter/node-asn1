@@ -1,7 +1,6 @@
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
-import { ASN1 } from '../common/types';
-import { InvalidAsn1Error } from './errors';
+import { ASN1, InvalidAsn1Error } from '../common';
 import * as assert from 'assert';
 
 class Options {

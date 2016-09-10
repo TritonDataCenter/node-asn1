@@ -1,4 +1,4 @@
-import { ASN1 } from '../common/types';
+import { ASN1 } from '../common';
 export declare class Writer {
     private _buf;
     private _size;

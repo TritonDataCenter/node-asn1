@@ -4,5 +4,5 @@
 // ftp://ftp.rsa.com/pub/pkcs/ascii/layman.asc
 
 ///--- Exported API
-export { ASN1 } from './common/types';
-export { Reader as BerReader, Writer as BerWriter, InvalidAsn1Error } from './ber/index';
+export { ASN1, InvalidAsn1Error } from './common';
+export { Reader as BerReader, Writer as BerWriter } from './ber/index';
