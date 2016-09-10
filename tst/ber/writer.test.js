@@ -1,7 +1,7 @@
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
 var test = require('tap').test;
-var sys = require('sys');
+var util = require('util');
 
 ///--- Globals
 
@@ -279,7 +279,7 @@ test('sequence', function(t) {
   var ber = writer.buffer;
 
   t.ok(ber);
-  console.log(ber);
+  // console.log(ber);
   t.equal(ber.length, 15, 'wrong length');
   t.equal(ber[0], 0x30, 'wrong tag');
   t.equal(ber[1], 13, 'wrong length');
@@ -361,10 +361,8 @@ test('Write OID', function(t) {
 
   var ber = writer.buffer;
   t.ok(ber);
-  console.log(require('util').inspect(ber));
-  console.log(require('util').inspect(new Buffer([0x06, 0x09, 0x2a, 0x86,
-                                                  0x48, 0x86, 0xf7, 0x0d,
-                                                  0x01, 0x01, 0x01])));
+  // console.log(util.inspect(ber));
+  // console.log(util.inspect(new Buffer([0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01, 0x01])));
 
   t.end();
 });
