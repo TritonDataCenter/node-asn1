@@ -1,0 +1,6 @@
+{
+  "globalDependencies": {},
+  "globalDevDependencies": {
+    "node-4": "registry:dt/node-4#4.0.0+20160909145701"
+  }
+}
