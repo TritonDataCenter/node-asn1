@@ -12,10 +12,18 @@ var BerReader;
 
 ///--- Tests
 
-test('load library', function(t) {
+test('load library (BerWriter)', function(t) {
   BerWriter = require('../../lib/index').BerWriter;
   t.ok(BerWriter);
   t.ok(new BerWriter());
+  t.end();
+});
+
+test('load library (Ber.Writer)', function(t) {
+  var Ber = require('../../lib/index').Ber;
+
+  var writer = new Ber.Writer();
+  t.ok(writer);
   t.end();
 });
 
