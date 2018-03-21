@@ -2,6 +2,7 @@
 
 var test = require('tap').test;
 var sys = require('sys');
+var Buffer = require('safer-buffer').Buffer;
 
 ///--- Globals
 
@@ -218,7 +219,7 @@ test('write buffer', function(t) {
   // write some stuff to start with
   writer.writeString('hello world');
   var ber = writer.buffer;
-  var buf = new Buffer([0x04, 0x0b, 0x30, 0x09, 0x02, 0x01, 0x0f, 0x01, 0x01,
+  var buf = Buffer.from([0x04, 0x0b, 0x30, 0x09, 0x02, 0x01, 0x0f, 0x01, 0x01,
      0xff, 0x01, 0x01, 0xff]);
   writer.writeBuffer(buf.slice(2, buf.length), 0x04);
   ber = writer.buffer;
@@ -362,7 +363,7 @@ test('Write OID', function(t) {
   var ber = writer.buffer;
   t.ok(ber);
   console.log(require('util').inspect(ber));
-  console.log(require('util').inspect(new Buffer([0x06, 0x09, 0x2a, 0x86,
+  console.log(require('util').inspect(Buffer.from([0x06, 0x09, 0x2a, 0x86,
                                                   0x48, 0x86, 0xf7, 0x0d,
                                                   0x01, 0x01, 0x01])));
 

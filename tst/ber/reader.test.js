@@ -1,6 +1,7 @@
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
 var test = require('tap').test;
+var Buffer = require('safer-buffer').Buffer;
 
 
 
@@ -26,7 +27,7 @@ test('load library', function(t) {
 
 
 test('read byte', function(t) {
-  var reader = new BerReader(new Buffer([0xde]));
+  var reader = new BerReader(Buffer.from([0xde]));
   t.ok(reader);
   t.equal(reader.readByte(), 0xde, 'wrong value');
   t.end();
@@ -34,7 +35,7 @@ test('read byte', function(t) {
 
 
 test('read 1 byte int', function(t) {
-  var reader = new BerReader(new Buffer([0x02, 0x01, 0x03]));
+  var reader = new BerReader(Buffer.from([0x02, 0x01, 0x03]));
   t.ok(reader);
   t.equal(reader.readInt(), 0x03, 'wrong value');
   t.equal(reader.length, 0x01, 'wrong length');
@@ -43,7 +44,7 @@ test('read 1 byte int', function(t) {
 
 
 test('read 2 byte int', function(t) {
-  var reader = new BerReader(new Buffer([0x02, 0x02, 0x7e, 0xde]));
+  var reader = new BerReader(Buffer.from([0x02, 0x02, 0x7e, 0xde]));
   t.ok(reader);
   t.equal(reader.readInt(), 0x7ede, 'wrong value');
   t.equal(reader.length, 0x02, 'wrong length');
@@ -52,7 +53,7 @@ test('read 2 byte int', function(t) {
 
 
 test('read 3 byte int', function(t) {
-  var reader = new BerReader(new Buffer([0x02, 0x03, 0x7e, 0xde, 0x03]));
+  var reader = new BerReader(Buffer.from([0x02, 0x03, 0x7e, 0xde, 0x03]));
   t.ok(reader);
   t.equal(reader.readInt(), 0x7ede03, 'wrong value');
   t.equal(reader.length, 0x03, 'wrong length');
@@ -61,7 +62,7 @@ test('read 3 byte int', function(t) {
 
 
 test('read 4 byte int', function(t) {
-  var reader = new BerReader(new Buffer([0x02, 0x04, 0x7e, 0xde, 0x03, 0x01]));
+  var reader = new BerReader(Buffer.from([0x02, 0x04, 0x7e, 0xde, 0x03, 0x01]));
   t.ok(reader);
   t.equal(reader.readInt(), 0x7ede0301, 'wrong value');
   t.equal(reader.length, 0x04, 'wrong length');
@@ -70,7 +71,7 @@ test('read 4 byte int', function(t) {
 
 
 test('read 1 byte negative int', function(t) {
-  var reader = new BerReader(new Buffer([0x02, 0x01, 0xdc]));
+  var reader = new BerReader(Buffer.from([0x02, 0x01, 0xdc]));
   t.ok(reader);
   t.equal(reader.readInt(), -36, 'wrong value');
   t.equal(reader.length, 0x01, 'wrong length');
@@ -79,7 +80,7 @@ test('read 1 byte negative int', function(t) {
 
 
 test('read 2 byte negative int', function(t) {
-  var reader = new BerReader(new Buffer([0x02, 0x02, 0xc0, 0x4e]));
+  var reader = new BerReader(Buffer.from([0x02, 0x02, 0xc0, 0x4e]));
   t.ok(reader);
   t.equal(reader.readInt(), -16306, 'wrong value');
   t.equal(reader.length, 0x02, 'wrong length');
@@ -88,7 +89,7 @@ test('read 2 byte negative int', function(t) {
 
 
 test('read 3 byte negative int', function(t) {
-  var reader = new BerReader(new Buffer([0x02, 0x03, 0xff, 0x00, 0x19]));
+  var reader = new BerReader(Buffer.from([0x02, 0x03, 0xff, 0x00, 0x19]));
   t.ok(reader);
   t.equal(reader.readInt(), -65511, 'wrong value');
   t.equal(reader.length, 0x03, 'wrong length');
@@ -97,7 +98,7 @@ test('read 3 byte negative int', function(t) {
 
 
 test('read 4 byte negative int', function(t) {
-  var reader = new BerReader(new Buffer([0x02, 0x04, 0x91, 0x7c, 0x22, 0x1f]));
+  var reader = new BerReader(Buffer.from([0x02, 0x04, 0x91, 0x7c, 0x22, 0x1f]));
   t.ok(reader);
   t.equal(reader.readInt(), -1854135777, 'wrong value');
   t.equal(reader.length, 0x04, 'wrong length');
@@ -106,7 +107,7 @@ test('read 4 byte negative int', function(t) {
 
 
 test('read boolean true', function(t) {
-  var reader = new BerReader(new Buffer([0x01, 0x01, 0xff]));
+  var reader = new BerReader(Buffer.from([0x01, 0x01, 0xff]));
   t.ok(reader);
   t.equal(reader.readBoolean(), true, 'wrong value');
   t.equal(reader.length, 0x01, 'wrong length');
@@ -115,7 +116,7 @@ test('read boolean true', function(t) {
 
 
 test('read boolean false', function(t) {
-  var reader = new BerReader(new Buffer([0x01, 0x01, 0x00]));
+  var reader = new BerReader(Buffer.from([0x01, 0x01, 0x00]));
   t.ok(reader);
   t.equal(reader.readBoolean(), false, 'wrong value');
   t.equal(reader.length, 0x01, 'wrong length');
@@ -124,7 +125,7 @@ test('read boolean false', function(t) {
 
 
 test('read enumeration', function(t) {
-  var reader = new BerReader(new Buffer([0x0a, 0x01, 0x20]));
+  var reader = new BerReader(Buffer.from([0x0a, 0x01, 0x20]));
   t.ok(reader);
   t.equal(reader.readEnumeration(), 0x20, 'wrong value');
   t.equal(reader.length, 0x01, 'wrong length');
@@ -134,7 +135,7 @@ test('read enumeration', function(t) {
 
 test('read string', function(t) {
   var dn = 'cn=foo,ou=unit,o=test';
-  var buf = new Buffer(dn.length + 2);
+  var buf = Buffer.alloc(dn.length + 2);
   buf[0] = 0x04;
   buf[1] = Buffer.byteLength(dn);
   buf.write(dn, 2);
@@ -147,7 +148,7 @@ test('read string', function(t) {
 
 
 test('read sequence', function(t) {
-  var reader = new BerReader(new Buffer([0x30, 0x03, 0x01, 0x01, 0xff]));
+  var reader = new BerReader(Buffer.from([0x30, 0x03, 0x01, 0x01, 0xff]));
   t.ok(reader);
   t.equal(reader.readSequence(), 0x30, 'wrong value');
   t.equal(reader.length, 0x03, 'wrong length');
@@ -158,7 +159,7 @@ test('read sequence', function(t) {
 
 
 test('anonymous LDAPv3 bind', function(t) {
-  var BIND = new Buffer(14);
+  var BIND = Buffer.alloc(14);
   BIND[0] = 0x30;  // Sequence
   BIND[1] = 12;    // len
   BIND[2] = 0x02;  // ASN.1 Integer
@@ -192,7 +193,7 @@ test('anonymous LDAPv3 bind', function(t) {
 
 
 test('long string', function(t) {
-  var buf = new Buffer(256);
+  var buf = Buffer.alloc(256);
   var o;
   var s =
     '2;649;CN=Red Hat CS 71GA Demo,O=Red Hat CS 71GA Demo,C=US;' +
