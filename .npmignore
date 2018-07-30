@@ -1,0 +1,12 @@
+*.log
+/Makefile
+/deps
+/test
+/tools
+/.gitmodules
+/.npmignore
+/.eslintrc
+/.travis.yml
+/CONTRIBUTING.md
+/build
+/coverage

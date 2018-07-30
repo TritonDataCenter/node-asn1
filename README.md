@@ -47,4 +47,4 @@ MIT.
 
 ## Bugs
 
-See <https://github.com/mcavage/node-asn1/issues>.
+See <https://github.com/joyent/node-asn1/issues>.
