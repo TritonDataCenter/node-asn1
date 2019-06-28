@@ -5,7 +5,7 @@
 #
 
 #
-# Copyright 2018, Joyent, Inc.
+# Copyright 2019, Joyent, Inc.
 #
 
 #
@@ -18,6 +18,7 @@
 
 ISTANBUL	:= node_modules/.bin/istanbul
 FAUCET		:= node_modules/.bin/faucet
+NODE		:= node
 NPM		:= npm
 
 #
@@ -30,20 +31,7 @@ JSSTYLE_FLAGS	= -f tools/jsstyle.conf
 ESLINT		= ./node_modules/.bin/eslint
 ESLINT_FILES	= $(JS_FILES)
 
-ifeq ($(shell uname -s),SunOS)
-	NODE_PREBUILT_VERSION =	v4.6.1
-	NODE_PREBUILT_TAG =	zone
-	NODE_PREBUILT_IMAGE =	18b094b0-eb01-11e5-80c1-175dac7ddf02
-endif
-
 include ./tools/mk/Makefile.defs
-ifeq ($(shell uname -s),SunOS)
-	include ./tools/mk/Makefile.node_prebuilt.defs
-else
-	NODE := node
-	NPM := $(shell which npm)
-	NPM_EXEC=$(NPM)
-endif
 include ./tools/mk/Makefile.smf.defs
 
 #
@@ -67,8 +55,5 @@ test: $(ISTANBUL) $(FAUCET)
 	$(ISTANBUL) cover --print none test/run.js | $(FAUCET)
 
 include ./tools/mk/Makefile.deps
-ifeq ($(shell uname -s),SunOS)
-	include ./tools/mk/Makefile.node_prebuilt.targ
-endif
 include ./tools/mk/Makefile.smf.targ
 include ./tools/mk/Makefile.targ
