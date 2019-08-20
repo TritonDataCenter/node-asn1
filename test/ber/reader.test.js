@@ -1,5 +1,6 @@
 // Copyright 2011 Mark Cavage <mcavage@gmail.com> All rights reserved.
 
+var assert = require('assert-plus');
 var test = require('tape');
 var Buffer = require('safer-buffer').Buffer;
 
@@ -21,7 +22,7 @@ test('load library', function (t) {
     t.equal(reader, null, 'reader');
     t.fail('Should have thrown');
   } catch (e) {
-    t.ok(e instanceof TypeError, 'Should have been a type error');
+    t.ok(e instanceof assert.AssertionError, 'Should have been a type error');
   }
   t.end();
 });

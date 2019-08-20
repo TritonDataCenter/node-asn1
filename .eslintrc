@@ -15,5 +15,9 @@
         "node": true
     },
     "rules": {
+        // Style:
+        "func-style": [ "error", "declaration" ],
+
+        "multiline-comment-style": [ "error", "starred-block" ]
     }
 }

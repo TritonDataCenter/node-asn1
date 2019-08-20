@@ -278,7 +278,6 @@ test('sequence', function (t) {
   var ber = writer.buffer;
 
   t.ok(ber);
-  console.log(ber);
   t.equal(ber.length, 15, 'wrong length');
   t.equal(ber[0], 0x30, 'wrong tag');
   t.equal(ber[1], 13, 'wrong length');
@@ -355,15 +354,15 @@ test('LDAP bind message', function (t) {
 
 test('Write OID', function (t) {
   var oid = '1.2.840.113549.1.1.1';
+  var exp = Buffer.from([
+    0x06, 0x09, 0x2a, 0x86,
+    0x48, 0x86, 0xf7, 0x0d,
+    0x01, 0x01, 0x01
+  ]);
+
   var writer = new BerWriter();
   writer.writeOID(oid);
 
-  var ber = writer.buffer;
-  t.ok(ber);
-  console.log(require('util').inspect(ber));
-  console.log(require('util').inspect(Buffer.from([0x06, 0x09, 0x2a, 0x86,
-                                                  0x48, 0x86, 0xf7, 0x0d,
-                                                  0x01, 0x01, 0x01])));
-
+  t.deepEqual(writer.buffer, exp, 'correct buffer generated');
   t.end();
 });

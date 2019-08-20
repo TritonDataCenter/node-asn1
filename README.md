@@ -1,5 +1,15 @@
+# asn1
+
+## About
+
 node-asn1 is a library for encoding and decoding ASN.1 datatypes in pure JS.
 Currently BER encoding is supported; at some point I'll likely have to do DER.
+
+## Installation
+
+Install [node.js](http://nodejs.org/), then:
+
+    npm install asn1
 
 ## Usage
 
@@ -14,32 +24,33 @@ common types out there.
 
 The following reads an ASN.1 sequence with a boolean.
 
-    var Ber = require('asn1').Ber;
+```javascript
+var Ber = require('asn1').Ber;
 
-    var reader = new Ber.Reader(Buffer.from([0x30, 0x03, 0x01, 0x01, 0xff]));
+var reader = new Ber.Reader(Buffer.from([0x30, 0x03, 0x01, 0x01, 0xff]));
 
-    reader.readSequence();
-    console.log('Sequence len: ' + reader.length);
-    if (reader.peek() === Ber.Boolean)
-      console.log(reader.readBoolean());
+reader.readSequence();
+console.log('Sequence len: ' + reader.length);
+if (reader.peek() === Ber.Boolean) {
+	console.log(reader.readBoolean());
+}
+```
 
 ### Encoding
 
 The following generates the same payload as above.
 
-    var Ber = require('asn1').Ber;
+```javascript
+var Ber = require('asn1').Ber;
 
-    var writer = new Ber.Writer();
+var writer = new Ber.Writer();
 
-    writer.startSequence();
-    writer.writeBoolean(true);
-    writer.endSequence();
+writer.startSequence();
+writer.writeBoolean(true);
+writer.endSequence();
 
-    console.log(writer.buffer);
-
-## Installation
-
-    npm install asn1
+console.log(writer.buffer);
+```
 
 ## License
 
