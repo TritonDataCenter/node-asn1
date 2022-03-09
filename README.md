@@ -1,3 +1,5 @@
+# node-asn1
+
 node-asn1 is a library for encoding and decoding ASN.1 datatypes in pure JS.
 Currently BER encoding is supported; at some point I'll likely have to do DER.
 
@@ -5,7 +7,7 @@ Currently BER encoding is supported; at some point I'll likely have to do DER.
 
 Mostly, if you're *actually* needing to read and write ASN.1, you probably don't
 need this readme to explain what and why.  If you have no idea what ASN.1 is,
-see this: ftp://ftp.rsa.com/pub/pkcs/ascii/layman.asc
+see [A Layman's Guide to a Subset of ASN.1, BER, and DER](layman.asc).
 
 The source is pretty much self-explanatory, and has read/write methods for the
 common types out there.
